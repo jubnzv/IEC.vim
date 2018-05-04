@@ -40,6 +40,9 @@ syn keyword STConditional IF ELSIF ELSE CASE END_IF END_CASE THEN OF TO
 syn keyword STLoop FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
 syn keyword STFunction EXIT RETURN
 
+" Comments
+syn region STComment start="(\*" end="\*)"
+
 " Highlighting
 hi link POUKeywords             Function
 hi link TypeKeywords            Type
@@ -54,7 +57,11 @@ hi link STOperator              Operator
 hi link STConditional           Conditional
 hi link STLoop                  Repeat
 hi link STFunction              Function
+hi link STComment               Comment
 
 let b:current_syntax = "st"
 
 set commentstring=\(\*\ %s\ \*\)
+
+" Enable automatic comment insertion
+setlocal fo+=cro
