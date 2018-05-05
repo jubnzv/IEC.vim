@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: Instruction List
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 23 March 2018
+" Latest Revision: 5 May 2018
 
 if exists("b:current_syntax")
   finish
@@ -39,6 +39,9 @@ syn keyword ILOperators LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
 syn keyword ILOperators MUL DIV MOD GT GE EQ NE LE LT JMP JMPC JMPCN CAL CALC
 syn keyword ILOperators CALCN RET RETC RETCN
 
+" Comments
+syn region ILComment start="(\*" end="\*)"
+
 " Highlighting
 hi link POUKeywords             Function
 hi link TypeKeywords            Type
@@ -50,5 +53,6 @@ hi link IECTypeReal             Type
 hi link IECTypeDate             Type
 hi link ILBoolean               Boolean
 hi link ILOperators             Operator
+hi link ILComment               Comment
 
 let b:current_syntax = "il"

@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: Structured Text
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 23 March 2018
+" Latest Revision: 5 May 2018
 
 if exists("b:current_syntax")
   finish
@@ -60,8 +60,3 @@ hi link STFunction              Function
 hi link STComment               Comment
 
 let b:current_syntax = "st"
-
-set commentstring=\(\*\ %s\ \*\)
-
-" Enable automatic comment insertion
-setlocal fo+=cro
