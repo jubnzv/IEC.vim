@@ -30,6 +30,8 @@ You could configure path to matiec installation directory with `matiec_path` var
 let matiec_path = '/home/jubnzv/.local/opt/matiec/'
 ```
 
+See `:help` for more configuration options.
+
 # License
 
 See [LICENSE](LICENSE) file.
