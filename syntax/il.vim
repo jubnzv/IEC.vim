@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: Instruction List
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 5 May 2018
+" Latest Revision: 15 May 2018
 
 if exists("b:current_syntax")
   finish
@@ -33,6 +33,9 @@ syn keyword IECTypeInteger SINT INT DINT LINT USINT UINT UDINT ULINT BYTE WORD D
 syn keyword IECTypeReal REAL LREAL
 syn keyword IECTypeDate TIME DATE DT TOD
 
+" Duration literals
+syn region  IECDuration start="#\(\-\)\=[0-9]\{1,2}\(\-[0-9]\{1,2}\)\{-\}[mshd(ms)]" end="[ ,]"he=e-1 contains=IECTypeDate
+
 " Instruction List definitions
 syn keyword ILBoolean TRUE FALSE
 syn keyword ILOperators LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
@@ -54,5 +57,6 @@ hi link IECTypeDate             Type
 hi link ILBoolean               Boolean
 hi link ILOperators             Operator
 hi link ILComment               Comment
+hi link IECDuration             String
 
 let b:current_syntax = "il"

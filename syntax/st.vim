@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: Structured Text
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 5 May 2018
+" Latest Revision: 15 May 2018
 
 if exists("b:current_syntax")
   finish
@@ -33,6 +33,9 @@ syn keyword IECTypeInteger SINT INT DINT LINT USINT UINT UDINT ULINT BYTE WORD D
 syn keyword IECTypeReal REAL LREAL
 syn keyword IECTypeDate TIME DATE DT TOD
 
+" Duration literals
+syn region  IECDuration start="#\(\-\)\=[0-9]\{1,2}\(\-[0-9]\{1,2}\)\{-\}[mshd(ms)]" end="[ ,]"he=e-1 contains=IECTypeDate
+
 " Structured Text definitions
 syn keyword STBoolean TRUE FALSE
 syn keyword STOperator NOT MOD AND XOR OR
@@ -58,5 +61,6 @@ hi link STConditional           Conditional
 hi link STLoop                  Repeat
 hi link STFunction              Function
 hi link STComment               Comment
+hi link IECDuration             String
 
 let b:current_syntax = "st"

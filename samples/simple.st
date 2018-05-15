@@ -4,7 +4,7 @@ PROGRAM program0
     Var1: DINT;
   END_VAR
 
-  LD    1
+  {}
 END_PROGRAM
 
 
