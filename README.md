@@ -1,6 +1,6 @@
 # IEC.vim
 
-Vim mode for editing source code files for [IEC 61131-3](https://en.wikipedia.org/wiki/IEC_61131-3) textual programming languages: [Sructured Text](https://en.wikipedia.org/wiki/Structured_text) and [Instruction List](https://en.wikipedia.org/wiki/Instruction_list).
+Vim mode for editing source code files for [IEC 61131-3](https://en.wikipedia.org/wiki/IEC_61131-3) textual programming languages: [Structured Text](https://en.wikipedia.org/wiki/Structured_text) and [Instruction List](https://en.wikipedia.org/wiki/Instruction_list).
 
 This plugin primarily designed to use with [matiec](https://github.com/sm1820/matiec) compiler.
 
