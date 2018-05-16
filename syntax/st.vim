@@ -1,11 +1,14 @@
 " Vim syntax file
 " Language: Structured Text
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 15 May 2018
+" Latest Revision: 16 May 2018
 
 if exists("b:current_syntax")
   finish
 endif
+
+" IEC syntax is case-insenstitive
+syntax case ignore
 
 " POU declaration
 syn keyword POUKeywords FUNCTION FUNCTION_BLOCK PROGRAM
@@ -17,10 +20,14 @@ syn keyword TypeKeywords TYPE STRUCT
 syn keyword TypeKeywords END_TYPE END_STRUCT
 syn keyword TypeKeywords ARRAY OF T D TIME_OF_DAY DATE_AND_TIME
 
-" Configuration declaration keywords
-syn keyword ConfigurationKeywords CONFIGURATION RESOURCE VAR_ACCESS VAR_CONFIG VAR_GLOBAL
-syn keyword ConfigurationKeywords END_CONFIGURATION END_RESOURCE END_VAR
-syn keyword ConfigurationKeywords ON WITH READ_ONLY READ_WRITE TASK
+" Configuration
+syn keyword IECConf         CONFIGURATION RESOURCE VAR_ACCESS VAR_CONFIG VAR_GLOBAL
+syn keyword IECConf         END_CONFIGURATION END_RESOURCE END_VAR
+syn keyword IECConf         WITH READ_ONLY READ_WRITE
+syn keyword IECConfTask     TASK
+syn keyword IECConfTaskOpt  INTERVAL PRIORITY SINGLE
+syn keyword IECConf         ON nextgroup=IECConfTargetName skipwhite
+syn match IECConfTargetName '\i\+' contained
 
 " Variable declaration keywords
 syn keyword VariableKeywords VAR VAR_INPUT VAR_OUTPUT VAR_IN_OUT VAR_TEMP VAR_EXTERNAL
@@ -49,7 +56,12 @@ syn region STComment start="(\*" end="\*)"
 " Highlighting
 hi link POUKeywords             Function
 hi link TypeKeywords            Type
-hi link ConfigurationKeywords   Special
+
+hi link IECConf                 Special
+hi link IECConfTask             Function
+hi link IECConfTaskOpt          Keyword
+hi link IECConfTargetName       Identifier
+
 hi link VariableKeywords        Keyword
 hi link IECTypeBool             Type
 hi link IECTypeInteger          Type
