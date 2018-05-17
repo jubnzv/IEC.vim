@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: Instruction List
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 16 May 2018
+" Latest Revision: 17 May 2018
 
 if exists("b:current_syntax")
   finish
@@ -40,10 +40,37 @@ syn keyword IECTypeInteger SINT INT DINT LINT USINT UINT UDINT ULINT BYTE WORD D
 syn keyword IECTypeReal REAL LREAL
 syn keyword IECTypeDate TIME DATE DT TOD
 
-" Duration literals
+" Duration literals [see: 2.2.3.1 (semantics), B.1.2.3.1(rules)]
 syn region  IECDuration start="#\(\-\)\=[0-9]\{1,2}\(\-[0-9]\{1,2}\)\{-\}[mshd(ms)]" end="[ ,]"he=e-1 contains=IECTypeDate
 
-" Instruction List definitions
+" Expressions clusters
+syntax cluster IECExpressions contains=@IECPOUItems,@IECTypeItems,@IECVarItems
+syntax cluster IECPOUItems contains=IECPOUKeyword
+syntax cluster IECTypeItems contains=IECTypeKeyword
+syntax cluster IECVarItems contains=IECVarKeyword
+
+" Configuration regions [see 2.7.1]
+syntax region IECOptConfifuration start="\<CONFIGURATION\>" end="\<END_CONFIGURATION\>" fold
+syntax region IECOptResource start="\<RESOURCE\>" end="\<END_RESOURCE\>" fold
+
+" 'Common element' regions [see 3.1]
+syntax region IECElementType start="\<TYPE\>" end="\<END_TYPE\>" contains=@IECExpressions fold
+syntax region IECElementVar start="\<VAR\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarIn start="\<VAR_INPUT\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarOut start="\<VAR_OUTPUT\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarInOut start="\<VAR_IN_OUT\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarExternal start="\<VAR_EXTERNAL\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarTemp start="\<VAR_TEMP\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarAccess start="\<VAR_ACCESS\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementVarGlobal start="\<VAR_GLOBAL\>" end="\<END_VAR\>" contains=@IECExpressions fold
+syntax region IECElementFunction start="\<FUNCTION\>" end="\<END_FUNCTION\>" contains=@IECExpressions fold
+syntax region IECElementFunctionBlock start="\<FUNCTION_BLOCK\>" end="\<END_FUNCTION_BLOCK\>" contains=@IECExpressions fold
+syntax region IECElementProgram start="\<PROGRAM\>" end="\<END_PROGRAM\>" contains=@IECExpressions fold
+syntax region IECElementStep start="\<STEP\>" end="\<END_STEP\>" contains=@IECExpressions fold
+syntax region IECElementTransition start="\<TRANSITION\>" end="\<END_TRANSITION\>" contains=@IECExpressions fold
+syntax region IECElementAction start="\<Action\>" end="\<END_ACTION\>" contains=@IECExpressions fold
+
+" Instruction List specific definitions
 syn keyword ILBoolean TRUE FALSE
 syn keyword ILOperators LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
 syn keyword ILOperators MUL DIV MOD GT GE EQ NE LE LT JMP JMPC JMPCN CAL CALC
@@ -52,23 +79,23 @@ syn keyword ILOperators CALCN RET RETC RETCN
 " Comments
 syn region ILComment start="(\*" end="\*)"
 
-" Highlighting
-hi link POUKeywords             Function
-hi link TypeKeywords            Type
-
+hi link IECPOUKeyword           Function
+hi link IECTypeKeyword          Type
+hi link IECVarKeyword           Keyword
 hi link IECConf                 Special
 hi link IECConfTask             Function
 hi link IECConfTaskOpt          Keyword
 hi link IECConfTargetName       Identifier
-
-hi link VariableKeywords        Keyword
 hi link IECTypeBool             Type
 hi link IECTypeInteger          Type
 hi link IECTypeReal             Type
 hi link IECTypeDate             Type
-hi link ILBoolean               Boolean
-hi link ILOperators             Operator
-hi link ILComment               Comment
 hi link IECDuration             String
+hi link STBoolean               Boolean
+hi link STOperator              Operator
+hi link STConditional           Conditional
+hi link STLoop                  Repeat
+hi link STFunction              Function
+hi link STComment               Comment
 
 let b:current_syntax = "il"
