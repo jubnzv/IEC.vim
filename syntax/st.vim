@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: Structured Text
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 17 May 2018
+" Latest Revision: 20 May 2018
 
 if exists("b:current_syntax")
   finish
@@ -10,44 +10,56 @@ endif
 " IEC syntax is case-insenstitive
 syntax case ignore
 
-" POU declaration
-syn keyword POUKeywords FUNCTION FUNCTION_BLOCK PROGRAM
-syn keyword POUKeywords END_FUNCTION END_FUNCTION_BLOCK END_PROGRAM
-syn keyword POUKeywords EN ENO F_EDGE R_EDGE
+" POU declaration {{{1
+syn keyword IECPOUKeyword FUNCTION FUNCTION_BLOCK PROGRAM
+syn keyword IECPOUKeyword END_FUNCTION END_FUNCTION_BLOCK END_PROGRAM
+syn keyword IECPOUKeyword EN ENO F_EDGE R_EDGE
 
-" Type declaration keywords
-syn keyword TypeKeywords TYPE STRUCT
-syn keyword TypeKeywords END_TYPE END_STRUCT
-syn keyword TypeKeywords ARRAY OF T D TIME_OF_DAY DATE_AND_TIME
+" Data types identifiers [see: 2.3] {{{1
+" Elementary data types [see: 2.3.1; table 10] {{{2
+syn keyword IECTypeInteger BOOL SINT INT DINT LINE USINT UINT UDINT ULINT
+syn keyword IECTypeReal REAL LREAL
+syn keyword IECTypeDate TIME DATE TIME_OF_DAY TOD DATE_AND_TIME DT
+syn keyword IECTypeString STRING BYTE WORD DWORD LWORD WSTRING
+" Generic data types [see: 2.3.2, table 11] {{{2
+syn keyword IECTypeGeneric ANY ANY_DERIVED ANY_ELEMENTARY ANY_MAGNITUDE
+syn keyword IECTypeGeneric ANY_NUM ANY_REAL ANY_INT ANY_BIT ANY_STRING ANY_DATE
+" Derived (user-specified) data types [see: 2.3.3, table 12] {{{2
+syn keyword IECTypeDerived TYPE STRUCT
+syn keyword IECTypeDerived END_TYPE END_STRUCT
+syn keyword IECTypeDerived ARRAY OF
 
-" Configuration
-syn keyword IECConf         CONFIGURATION RESOURCE VAR_ACCESS VAR_CONFIG VAR_GLOBAL
-syn keyword IECConf         END_CONFIGURATION END_RESOURCE END_VAR
-syn keyword IECConf         WITH READ_ONLY READ_WRITE
-syn keyword IECConfTask     TASK
-syn keyword IECConfTaskOpt  INTERVAL PRIORITY SINGLE
-syn keyword IECConf         ON nextgroup=IECConfTargetName skipwhite
+" Data types literals {{{1
+syn keyword IECBoolean TRUE FALSE
+
+" Configuration {{{1
+syn keyword IECConf CONFIGURATION RESOURCE VAR_ACCESS VAR_CONFIG VAR_GLOBAL
+syn keyword IECConf END_CONFIGURATION END_RESOURCE END_VAR
+syn keyword IECConf WITH READ_ONLY READ_WRITE
+syn keyword IECConfTask TASK
+syn keyword IECConfTaskOpt INTERVAL PRIORITY SINGLE
+syn keyword IECConf ON nextgroup=IECConfTargetName skipwhite
 syn match IECConfTargetName '\i\+' contained
 
-" Variable declaration keywords
-syn keyword VariableKeywords VAR VAR_INPUT VAR_OUTPUT VAR_IN_OUT VAR_TEMP VAR_EXTERNAL
-syn keyword VariableKeywords END_VAR
-syn keyword VariableKeywords AT CONSTANT RETAIN NON_RETAIN
+" Variable declaration {{{1
+syn keyword IECVarKeyword VAR VAR_INPUT VAR_OUTPUT VAR_IN_OUT VAR_TEMP VAR_EXTERNAL
+syn keyword IECVarKeyword END_VAR
+syn keyword IECVarKeyword AT CONSTANT RETAIN NON_RETAIN
 
-" Duration literals [see: 2.2.3.1 (semantics), B.1.2.3.1(rules)]
+" Duration literals [see: 2.2.3.1 (semantics), B.1.2.3.1(rules)] {{{1
 syn region  IECDuration start="#\(\-\)\=[0-9]\{1,2}\(\-[0-9]\{1,2}\)\{-\}[mshd(ms)]" end="[ ,]"he=e-1 contains=IECTypeDate
 
-" Expressions clusters
+" Expressions clusters {{{1
 syntax cluster IECExpressions contains=@IECPOUItems,@IECTypeItems,@IECVarItems
 syntax cluster IECPOUItems contains=IECPOUKeyword
-syntax cluster IECTypeItems contains=IECTypeKeyword
+syntax cluster IECTypeItems contains=IECTypeInteger,IECTypeReal,IECTypeDate,IECTypeString,IECTypeGeneric,IECTypeDerived
 syntax cluster IECVarItems contains=IECVarKeyword
 
-" Configuration regions [see 2.7.1]
+" Configuration regions [see 2.7.1] {{{1
 syntax region IECOptConfifuration start="\<CONFIGURATION\>" end="\<END_CONFIGURATION\>" fold
 syntax region IECOptResource start="\<RESOURCE\>" end="\<END_RESOURCE\>" fold
 
-" 'Common element' regions [see 3.1]
+" 'Common element' regions [see 3.1] {{{1
 syntax region IECElementType start="\<TYPE\>" end="\<END_TYPE\>" contains=@IECExpressions fold
 syntax region IECElementVar start="\<VAR\>" end="\<END_VAR\>" contains=@IECExpressions fold
 syntax region IECElementVarIn start="\<VAR_INPUT\>" end="\<END_VAR\>" contains=@IECExpressions fold
@@ -64,33 +76,44 @@ syntax region IECElementStep start="\<STEP\>" end="\<END_STEP\>" contains=@IECEx
 syntax region IECElementTransition start="\<TRANSITION\>" end="\<END_TRANSITION\>" contains=@IECExpressions fold
 syntax region IECElementAction start="\<Action\>" end="\<END_ACTION\>" contains=@IECExpressions fold
 
-" Structured Text specific definitions
-syn keyword STBoolean TRUE FALSE
+" Comments {{{1
+syn region IECComment start="(\*" end="\*)"
+
+" Structured Text expressions [see: 3.3] {{{1
+" ST operators [see: table 55]
 syn keyword STOperator NOT MOD AND XOR OR
-syn keyword STConditional IF ELSIF ELSE CASE END_IF END_CASE THEN OF TO
-syn keyword STLoop FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
-syn keyword STFunction EXIT RETURN
+" ST statements [see: 3.3.2, table 56]
+syn keyword STConditional IF ELSIF ELSE END_IF END_CASE THEN TO
+syn keyword STLabel CASE
+syn keyword STRepeat FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
+syn keyword STStatement EXIT RETURN
 
-" Comments
-syn region STComment start="(\*" end="\*)"
-
+" Highlighting  {{{1
 hi link IECPOUKeyword           Function
-hi link IECTypeKeyword          Type
 hi link IECVarKeyword           Keyword
 hi link IECConf                 Special
 hi link IECConfTask             Function
 hi link IECConfTaskOpt          Keyword
 hi link IECConfTargetName       Identifier
-hi link IECTypeBool             Type
+" Data types identifiers {{{2
 hi link IECTypeInteger          Type
 hi link IECTypeReal             Type
 hi link IECTypeDate             Type
+hi link IECTypeString           Type
+hi link IECTypeGeneric          Struct
+hi link IECTypeDerived          Type
+" Data types literals {{{2
 hi link IECDuration             String
-hi link STBoolean               Boolean
-hi link STOperator              Operator
+hi link IECBoolean              Boolean
+" Comments {{{2
+hi link IECComment              Comment
+" Structured Text special {{{2
+hi link STOperator              Statement
 hi link STConditional           Conditional
-hi link STLoop                  Repeat
-hi link STFunction              Function
-hi link STComment               Comment
+hi link STRepeat                Repeat
+hi link STStatement             Statement
 
+" {{{1
 let b:current_syntax = "st"
+
+" vim: foldmethod=marker sw=2
