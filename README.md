@@ -20,7 +20,9 @@ Plug 'https://github.com/jubnzv/IEC.vim.git'
 
 # Usage
 
-To translate current IEC source file to C directly from vim use:
+## Matiec integration
+
+To translate current IEC source file to C directly from vim using matiec:
 ```
 :make %<
 ```
