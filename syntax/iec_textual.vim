@@ -1,10 +1,13 @@
 " Vim syntax file
 " Language: IEC 61131-3 Textual
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 23 May 2018
+" Latest Revision: 07 Jan 2020
 "
 " This file describes syntax rules for both textual IEC 61131-3 languages:
 " Structured Text and Instruction List.
+"
+" REFERENCES:
+"   [1] http://www.plcopen.org/pages/tc1_standards/iec61131-3/
 "
 
 if exists("b:current_syntax")
@@ -37,8 +40,8 @@ syn keyword IECTypeDerived ARRAY OF
 syn keyword IECBoolean TRUE FALSE
 
 " Configuration {{{1
-syn keyword IECConf CONFIGURATION RESOURCE VAR_ACCESS VAR_CONFIG VAR_GLOBAL
-syn keyword IECConf END_CONFIGURATION END_RESOURCE END_VAR
+syn keyword IECConf CONFIGURATION RESOURCE
+syn keyword IECConf END_CONFIGURATION END_RESOURCE
 syn keyword IECConf WITH READ_ONLY READ_WRITE
 syn keyword IECConfTask TASK
 syn keyword IECConfTaskOpt INTERVAL PRIORITY SINGLE
@@ -46,7 +49,7 @@ syn keyword IECConf ON nextgroup=IECConfTargetName skipwhite
 syn match IECConfTargetName '\i\+' contained
 
 " Variable declaration {{{1
-syn keyword IECVarKeyword VAR VAR_INPUT VAR_OUTPUT VAR_IN_OUT VAR_TEMP VAR_EXTERNAL
+syn keyword IECVarKeyword VAR VAR_INPUT VAR_OUTPUT VAR_IN_OUT VAR_TEMP VAR_EXTERNAL VAR_ACCESS VAR_CONFIG VAR_GLOBAL
 syn keyword IECVarKeyword END_VAR
 syn keyword IECVarKeyword AT CONSTANT RETAIN NON_RETAIN
 
@@ -104,6 +107,6 @@ hi link IECBoolean              Boolean
 hi link IECComment              Comment
 
 " {{{1
-let b:current_syntax = "iec"
+let b:current_syntax = "iec_textual"
 
 " vim: foldmethod=marker sw=2

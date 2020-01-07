@@ -8,7 +8,7 @@ if exists("b:current_syntax")
 endif
 
 " Import common IEC 61131-3 syntax rules
-runtime! syntax/iec.vim
+runtime! syntax/iec_textual.vim
 
 " IL syntax is case-insenstitive
 syntax case ignore
