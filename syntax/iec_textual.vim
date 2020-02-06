@@ -24,11 +24,12 @@ syn keyword IECPOUKeyword EN ENO F_EDGE R_EDGE
 
 " Data types identifiers [see: 2.3] {{{1
 " Elementary data types [see: 2.3.1; table 10] {{{2
-syn keyword IECTypeInteger BOOL SINT INT DINT LINE USINT UINT UDINT ULINT
+syn keyword IECTypeInteger SINT INT DINT LINE USINT UINT UDINT ULINT
 syn keyword IECTypeReal REAL LREAL
 syn keyword IECTypeDate TIME DATE TIME_OF_DAY TOD DATE_AND_TIME DT
 syn keyword IECTypeDate LTIME LDATE LTIME_OF_DAY LTOD LDATE_AND_TIME LDT
-syn keyword IECTypeString STRING BYTE WORD DWORD LWORD WSTRING
+syn keyword IECTypeString BOOL BYTE WORD DWORD LWORD
+syn keyword IECTypeString STRING WSTRING CHAR WCHAR
 " Generic data types [see: 2.3.2, table 11] {{{2
 syn keyword IECTypeGeneric ANY ANY_DERIVED ANY_ELEMENTARY ANY_MAGNITUDE
 syn keyword IECTypeGeneric ANY_NUM ANY_REAL ANY_INT ANY_BIT ANY_STRING ANY_DATE
