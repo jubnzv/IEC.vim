@@ -17,8 +17,7 @@ syntax case ignore
 " ST operators [see: table 55]
 syn keyword STOperator NOT MOD AND XOR OR
 " ST statements [see: 3.3.2, table 56]
-syn keyword STConditional IF ELSIF ELSE END_IF END_CASE THEN TO
-syn keyword STLabel CASE
+syn keyword STConditional IF ELSIF ELSE END_IF CASE END_CASE THEN TO
 syn keyword STRepeat FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
 syn keyword STStatement EXIT RETURN
 " }}}1
