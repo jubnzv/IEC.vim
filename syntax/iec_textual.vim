@@ -17,31 +17,34 @@ endif
 " IEC syntax is case-insenstitive
 syntax case ignore
 
-" POU declaration {{{1
+"  {{{ POU declaration
 syn keyword IECPOUKeyword FUNCTION FUNCTION_BLOCK PROGRAM
 syn keyword IECPOUKeyword END_FUNCTION END_FUNCTION_BLOCK END_PROGRAM
 syn keyword IECPOUKeyword EN ENO F_EDGE R_EDGE
+" }}}
 
-" Data types identifiers [see: 2.3] {{{1
-" Elementary data types [see: 2.3.1; table 10] {{{2
+" {{{ Data types identifiers [see: 2.3]
+" Elementary data types [see: 2.3.1; table 10]
 syn keyword IECTypeInteger SINT INT DINT LINE USINT UINT UDINT ULINT
 syn keyword IECTypeReal REAL LREAL
 syn keyword IECTypeDate TIME DATE TIME_OF_DAY TOD DATE_AND_TIME DT
 syn keyword IECTypeDate LTIME LDATE LTIME_OF_DAY LTOD LDATE_AND_TIME LDT
 syn keyword IECTypeString BOOL BYTE WORD DWORD LWORD
 syn keyword IECTypeString STRING WSTRING CHAR WCHAR
-" Generic data types [see: 2.3.2, table 11] {{{2
+" Generic data types [see: 2.3.2, table 11]
 syn keyword IECTypeGeneric ANY ANY_DERIVED ANY_ELEMENTARY ANY_MAGNITUDE
 syn keyword IECTypeGeneric ANY_NUM ANY_REAL ANY_INT ANY_BIT ANY_STRING ANY_DATE
-" Derived (user-specified) data types [see: 2.3.3, table 12] {{{2
+" Derived (user-specified) data types [see: 2.3.3, table 12]
 syn keyword IECTypeDerived TYPE STRUCT
 syn keyword IECTypeDerived END_TYPE END_STRUCT
 syn keyword IECTypeDerived ARRAY OF
+" }}}
 
-" Data types literals {{{1
+" {{{ Data types literals
 syn keyword IECBoolean TRUE FALSE
+" }}}
 
-" Configuration {{{1
+" {{{ Configuration
 syn keyword IECConf CONFIGURATION RESOURCE
 syn keyword IECConf END_CONFIGURATION END_RESOURCE
 syn keyword IECConf WITH READ_ONLY READ_WRITE
@@ -49,26 +52,31 @@ syn keyword IECConfTask TASK
 syn keyword IECConfTaskOpt INTERVAL PRIORITY SINGLE
 syn keyword IECConf ON nextgroup=IECConfTargetName skipwhite
 syn match IECConfTargetName '\i\+' contained
+" }}}
 
-" Variable declaration {{{1
+" {{{ Variable declaration
 syn keyword IECVarKeyword VAR VAR_INPUT VAR_OUTPUT VAR_IN_OUT VAR_TEMP VAR_EXTERNAL VAR_ACCESS VAR_CONFIG VAR_GLOBAL
 syn keyword IECVarKeyword END_VAR
 syn keyword IECVarKeyword AT CONSTANT RETAIN NON_RETAIN
+" }}}
 
-" Duration literals [see: 2.2.3.1 (semantics), B.1.2.3.1(rules)] {{{1
+" {{{ Duration literals [see: 2.2.3.1 (semantics), B.1.2.3.1(rules)]
 syn region  IECDuration start="#\(\-\)\=[0-9]\{1,2}\(\-[0-9]\{1,2}\)\{-\}[mshd(ms)]" end="[ ,]"he=e-1 contains=IECTypeDate
+" }}}
 
-" Expressions clusters {{{1
+" {{{ Expressions clusters
 syntax cluster IECExpressions contains=@IECPOUItems,@IECTypeItems,@IECVarItems
 syntax cluster IECPOUItems contains=IECPOUKeyword
 syntax cluster IECTypeItems contains=IECTypeInteger,IECTypeReal,IECTypeDate,IECTypeString,IECTypeGeneric,IECTypeDerived
 syntax cluster IECVarItems contains=IECVarKeyword
+" }}}
 
-" Configuration regions [see 2.7.1] {{{1
+" {{{ Configuration regions [see 2.7.1]
 syntax region IECOptConfifuration start="\<CONFIGURATION\>" end="\<END_CONFIGURATION\>" fold
 syntax region IECOptResource start="\<RESOURCE\>" end="\<END_RESOURCE\>" fold
+" }}}
 
-" 'Common element' regions [see 3.1] {{{1
+" {{{ 'Common element' regions [see 3.1]
 syntax region IECElementType start="\<TYPE\>" end="\<END_TYPE\>" contains=@IECExpressions fold
 syntax region IECElementVar start="\<VAR\>" end="\<END_VAR\>" contains=@IECExpressions fold
 syntax region IECElementVarIn start="\<VAR_INPUT\>" end="\<END_VAR\>" contains=@IECExpressions fold
@@ -84,31 +92,33 @@ syntax region IECElementProgram start="\<PROGRAM\>" end="\<END_PROGRAM\>" contai
 syntax region IECElementStep start="\<STEP\>" end="\<END_STEP\>" contains=@IECExpressions fold
 syntax region IECElementTransition start="\<TRANSITION\>" end="\<END_TRANSITION\>" contains=@IECExpressions fold
 syntax region IECElementAction start="\<Action\>" end="\<END_ACTION\>" contains=@IECExpressions fold
+" }}}
 
-" Comments {{{1
+" {{{ Comments
 syn region IECComment start="(\*" end="\*)"
+" }}}
 
-" Highlighting  {{{1
+" {{{ Highlighting
 hi link IECPOUKeyword           Function
 hi link IECVarKeyword           Keyword
 hi link IECConf                 Special
 hi link IECConfTask             Function
 hi link IECConfTaskOpt          Keyword
 hi link IECConfTargetName       Identifier
-" Data types identifiers {{{2
+" Data types identifiers
 hi link IECTypeInteger          Type
 hi link IECTypeReal             Type
 hi link IECTypeDate             Type
 hi link IECTypeString           Type
 hi link IECTypeGeneric          Struct
 hi link IECTypeDerived          Type
-" Data types literals {{{2
+" Data types literals
 hi link IECDuration             String
 hi link IECBoolean              Boolean
-" Comments {{{2
+" Comments
 hi link IECComment              Comment
+" }}}
 
-" {{{1
 let b:current_syntax = "iec_textual"
 
 " vim: foldmethod=marker sw=2

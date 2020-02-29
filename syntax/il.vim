@@ -13,16 +13,16 @@ runtime! syntax/iec_textual.vim
 " IL syntax is case-insenstitive
 syntax case ignore
 
-" Instruction List [see: 3.2] {{{1
+" {{{ Instruction List [see: 3.2]
 " IL Operators [see: table 52]
 syn keyword ILOperator LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
 syn keyword ILOperator MUL DIV MOD GT GE EQ NE LE LT JMP JMPC JMPCN CAL CALC
 syn keyword ILOperator CALCN RET RETC RETCN
-" }}}1
+" }}}
 
-" Highlighting {{{1
+" {{{ Highlighting
 hi link ILOperator              Statement
-" }}}1
+" }}}
 
 let b:current_syntax = "il"
 
