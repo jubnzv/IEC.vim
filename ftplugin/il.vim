@@ -8,8 +8,6 @@ if (exists('b:did_ftplugin'))
 endif
 let b:did_ftplugin = 1
 
-compiler iec2c
-
 setlocal formatoptions-=t
 setlocal foldmethod=indent
 setlocal commentstring=(\*\ %s\ \*)
