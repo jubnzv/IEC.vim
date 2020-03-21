@@ -1,8 +1,7 @@
 " Vim filetype plugin
-" Language: Instruction List
+" Language: IEC 611131 textual
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 9 May 2018
-
+" Latest Revision: 2020-03-21
 if (exists('b:did_ftplugin'))
   finish
 endif

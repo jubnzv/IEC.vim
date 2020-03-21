@@ -23,25 +23,10 @@ License: MIT license {{{
 
 CONTENTS                                 *iec-vim*
 
-Introduction                            |iec-vim-introduction|
-MatIEC integration                      |iec-vim-matiec|
+Introduction                            |iec-vim-overview|
 
 ==============================================================================
-INTRODUCTION                                        *iec-vim-introduction*
+OVERVIEW                                        *iec-vim-overview*
 
-This plugin provides IEC 61131-3 languages support. Examples can be found in
-samples directory.
-
-==============================================================================
-MATIEC INTEGRATION                                  *iec-vim-matiec*
-
-Current plugin designed to pair with matiec compiler backend. Read more about
-matiec: https://bitbucket.org/mjsousa/matiec.
-
-To translate currently editing .st file to C sources use following command:
-
-	:make %<
-
-Available configuration variables:
-
-    g:matiec_path       Path to local matiec installation
+This plugin provides syntax highlighting for IEC 61131-3 (3rd Edition) textual
+languages: ST, IL and SFC.

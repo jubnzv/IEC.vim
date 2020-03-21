@@ -1,10 +1,9 @@
 " Vim syntax file
 " Language: IEC 61131-3 Textual
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 07 Jan 2020
+" Latest Revision: 2020-03-21
 "
-" This file describes syntax rules for both textual IEC 61131-3 languages:
-" Structured Text and Instruction List.
+" This file describes syntax rules for textual IEC 61131-3 languages.
 "
 " REFERENCES:
 "   [1] http://www.plcopen.org/pages/tc1_standards/iec61131-3/
@@ -94,6 +93,22 @@ syntax region IECElementTransition start="\<TRANSITION\>" end="\<END_TRANSITION\
 syntax region IECElementAction start="\<Action\>" end="\<END_ACTION\>" contains=@IECExpressions fold
 " }}}
 
+" {{{ Instruction List [see: 3.2]
+" IL Operators [see: table 52]
+syn keyword ILOperator LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
+syn keyword ILOperator MUL DIV MOD GT GE EQ NE LE LT JMP JMPC JMPCN CAL CALC
+syn keyword ILOperator CALCN RET RETC RETCN
+" }}}
+
+" {{{ Structured Text expressions [see: 3.3]
+" ST operators [see: table 55]
+syn keyword STOperator NOT MOD AND XOR OR
+" ST statements [see: 3.3.2, table 56]
+syn keyword STConditional IF ELSIF ELSE END_IF CASE END_CASE THEN TO
+syn keyword STRepeat FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
+syn keyword STStatement EXIT CONTINUE RETURN
+" }}}
+
 " {{{ Comments
 syn region IECComment start="(\*" end="\*)"
 " }}}
@@ -115,10 +130,17 @@ hi link IECTypeDerived          Type
 " Data types literals
 hi link IECDuration             String
 hi link IECBoolean              Boolean
+" ST
+hi link STOperator              Statement
+hi link STConditional           Conditional
+hi link STRepeat                Repeat
+hi link STStatement             Statement
+" IL
+hi link ILOperator              Statement
 " Comments
 hi link IECComment              Comment
 " }}}
 
-let b:current_syntax = "iec_textual"
+let b:current_syntax = "iec"
 
 " vim: foldmethod=marker sw=2
