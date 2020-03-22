@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: IEC 61131-3 Textual
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 2020-03-21
+" Latest Revision: 2020-03-22
 "
 " This file describes syntax rules for textual IEC 61131-3 languages.
 "
@@ -93,6 +93,12 @@ syntax region IECElementTransition start="\<TRANSITION\>" end="\<END_TRANSITION\
 syntax region IECElementAction start="\<Action\>" end="\<END_ACTION\>" contains=@IECExpressions fold
 " }}}
 
+" {{{ SFC
+syn keyword SFCElement STEP INITIAL_STEP END_STEP
+syn keyword SFCElement TRANSITION END_TRANSITION
+syn keyword SFCElement ACTION END_ACTION
+" }}}
+
 " {{{ Instruction List [see: 3.2]
 " IL Operators [see: table 52]
 syn keyword ILOperator LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
@@ -135,6 +141,8 @@ hi link STOperator              Statement
 hi link STConditional           Conditional
 hi link STRepeat                Repeat
 hi link STStatement             Statement
+" SFC
+hi link SFCElement              Statement
 " IL
 hi link ILOperator              Statement
 " Comments
