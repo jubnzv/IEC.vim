@@ -113,6 +113,7 @@ syn keyword STOperator NOT MOD AND XOR OR
 syn keyword STConditional IF ELSIF ELSE END_IF CASE END_CASE THEN TO
 syn keyword STRepeat FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
 syn keyword STStatement EXIT CONTINUE RETURN
+syn keyword STStatement OVERLAP REF_TO
 " }}}
 
 " {{{ Comments
