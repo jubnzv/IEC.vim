@@ -1,14 +1,13 @@
 " Vim syntax file
-" Language: IEC 61131-3 Textual
+" Language: IEC 61131-3 Textual languages
 " Maintainer: Georgy Komarov <jubnzv@gmail.com>
-" Latest Revision: 2020-03-22
+" Latest Revision: 2020-05-10
 "
 " This file describes syntax rules for textual IEC 61131-3 languages.
 "
 " REFERENCES:
 "   [1] http://www.plcopen.org/pages/tc1_standards/iec61131-3/
 "
-
 if exists("b:current_syntax")
   finish
 endif
@@ -22,18 +21,18 @@ syn keyword IECPOUKeyword END_FUNCTION END_FUNCTION_BLOCK END_PROGRAM
 syn keyword IECPOUKeyword EN ENO F_EDGE R_EDGE
 " }}}
 
-" {{{ Data types identifiers [see: 2.3]
-" Elementary data types [see: 2.3.1; table 10]
+" {{{ Data types identifiers
+" Elementary data types
 syn keyword IECTypeInteger SINT INT DINT LINE USINT UINT UDINT ULINT
 syn keyword IECTypeReal REAL LREAL
 syn keyword IECTypeDate TIME DATE TIME_OF_DAY TOD DATE_AND_TIME DT
 syn keyword IECTypeDate LTIME LDATE LTIME_OF_DAY LTOD LDATE_AND_TIME LDT
 syn keyword IECTypeString BOOL BYTE WORD DWORD LWORD
 syn keyword IECTypeString STRING WSTRING CHAR WCHAR
-" Generic data types [see: 2.3.2, table 11]
+" Generic data types
 syn keyword IECTypeGeneric ANY ANY_DERIVED ANY_ELEMENTARY ANY_MAGNITUDE
 syn keyword IECTypeGeneric ANY_NUM ANY_REAL ANY_INT ANY_BIT ANY_STRING ANY_DATE
-" Derived (user-specified) data types [see: 2.3.3, table 12]
+" Derived (user-specified) data types
 syn keyword IECTypeDerived TYPE STRUCT
 syn keyword IECTypeDerived END_TYPE END_STRUCT
 syn keyword IECTypeDerived ARRAY OF
@@ -59,7 +58,7 @@ syn keyword IECVarKeyword END_VAR
 syn keyword IECVarKeyword AT CONSTANT RETAIN NON_RETAIN
 " }}}
 
-" {{{ Duration literals [see: 2.2.3.1 (semantics), B.1.2.3.1(rules)]
+" {{{ Duration literals
 syn region  IECDuration start="#\(\-\)\=[0-9]\{1,2}\(\-[0-9]\{1,2}\)\{-\}[mshd(ms)]" end="[ ,]"he=e-1 contains=IECTypeDate
 " }}}
 
@@ -70,12 +69,12 @@ syntax cluster IECTypeItems contains=IECTypeInteger,IECTypeReal,IECTypeDate,IECT
 syntax cluster IECVarItems contains=IECVarKeyword
 " }}}
 
-" {{{ Configuration regions [see 2.7.1]
+" {{{ Configuration regions
 syntax region IECOptConfifuration start="\<CONFIGURATION\>" end="\<END_CONFIGURATION\>" fold
 syntax region IECOptResource start="\<RESOURCE\>" end="\<END_RESOURCE\>" fold
 " }}}
 
-" {{{ 'Common element' regions [see 3.1]
+" {{{ 'Common element' regions
 syntax region IECElementType start="\<TYPE\>" end="\<END_TYPE\>" contains=@IECExpressions fold
 syntax region IECElementVar start="\<VAR\>" end="\<END_VAR\>" contains=@IECExpressions fold
 syntax region IECElementVarIn start="\<VAR_INPUT\>" end="\<END_VAR\>" contains=@IECExpressions fold
@@ -99,17 +98,17 @@ syn keyword SFCElement TRANSITION END_TRANSITION
 syn keyword SFCElement ACTION END_ACTION
 " }}}
 
-" {{{ Instruction List [see: 3.2]
-" IL Operators [see: table 52]
+" {{{ Instruction List
+" IL Operators
 syn keyword ILOperator LD LDN ST STN S R AND ANDN OR ORN XOR XORN NOT ADD SUB
 syn keyword ILOperator MUL DIV MOD GT GE EQ NE LE LT JMP JMPC JMPCN CAL CALC
 syn keyword ILOperator CALCN RET RETC RETCN
 " }}}
 
-" {{{ Structured Text expressions [see: 3.3]
-" ST operators [see: table 55]
+" {{{ Structured Text expressions
+" ST operators
 syn keyword STOperator NOT MOD AND XOR OR
-" ST statements [see: 3.3.2, table 56]
+" ST statements
 syn keyword STConditional IF ELSIF ELSE END_IF CASE END_CASE THEN TO
 syn keyword STRepeat FOR WHILE REPEAT END_FOR END_WHILE END_REPEAT BY DO DO UNTIL
 syn keyword STStatement EXIT CONTINUE RETURN
@@ -117,39 +116,37 @@ syn keyword STStatement OVERLAP REF_TO
 " }}}
 
 " {{{ Comments
-setlocal comments=
-setlocal commentstring=(*%s*)
 syn region IECComment start="(\*" end="\*)"
 " }}}
 
 " {{{ Highlighting
-hi link IECPOUKeyword           Function
-hi link IECVarKeyword           Keyword
-hi link IECConf                 Special
-hi link IECConfTask             Function
-hi link IECConfTaskOpt          Keyword
-hi link IECConfTargetName       Identifier
+hi def link IECPOUKeyword           Function
+hi def link IECVarKeyword           Keyword
+hi def link IECConf                 Special
+hi def link IECConfTask             Function
+hi def link IECConfTaskOpt          Keyword
+hi def link IECConfTargetName       Identifier
 " Data types identifiers
-hi link IECTypeInteger          Type
-hi link IECTypeReal             Type
-hi link IECTypeDate             Type
-hi link IECTypeString           Type
-hi link IECTypeGeneric          Struct
-hi link IECTypeDerived          Type
+hi def link IECTypeInteger          Type
+hi def link IECTypeReal             Type
+hi def link IECTypeDate             Type
+hi def link IECTypeString           Type
+hi def link IECTypeGeneric          Struct
+hi def link IECTypeDerived          Type
 " Data types literals
-hi link IECDuration             String
-hi link IECBoolean              Boolean
+hi def link IECDuration             String
+hi def link IECBoolean              Boolean
 " ST
-hi link STOperator              Statement
-hi link STConditional           Conditional
-hi link STRepeat                Repeat
-hi link STStatement             Statement
+hi def link STOperator              Statement
+hi def link STConditional           Conditional
+hi def link STRepeat                Repeat
+hi def link STStatement             Statement
 " SFC
-hi link SFCElement              Statement
+hi def link SFCElement              Statement
 " IL
-hi link ILOperator              Statement
+hi def link ILOperator              Statement
 " Comments
-hi link IECComment              Comment
+hi def link IECComment              Comment
 " }}}
 
 let b:current_syntax = "iec"
