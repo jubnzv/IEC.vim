@@ -117,6 +117,8 @@ syn keyword STStatement OVERLAP REF_TO
 " }}}
 
 " {{{ Comments
+setlocal comments=
+setlocal commentstring=(*%s*)
 syn region IECComment start="(\*" end="\*)"
 " }}}
 
