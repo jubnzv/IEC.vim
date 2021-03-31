@@ -16,9 +16,12 @@ endif
 syntax case ignore
 
 "  {{{ POU declaration
-syn keyword IECPOUKeyword FUNCTION FUNCTION_BLOCK PROGRAM
-syn keyword IECPOUKeyword END_FUNCTION END_FUNCTION_BLOCK END_PROGRAM
+syn keyword IECPOUKeyword FUNCTION FUNCTION_BLOCK PROGRAM CLASS INTERFACE METHOD
+syn keyword IECPOUKeyword END_FUNCTION END_FUNCTION_BLOCK END_PROGRAM END_CLASS END_INTERFACE END_METHOD
 syn keyword IECPOUKeyword EN ENO F_EDGE R_EDGE
+
+syn keyword IECAccessSpecifier PUBLIC PRIVATE PROTECTED INTERNAL
+syn keyword IECSpecial OVERRIDE ABSTRACT FINAL EXTENDS IMPLEMENTS
 " }}}
 
 " {{{ Data types identifiers
@@ -121,6 +124,8 @@ syn region IECComment start="(\*" end="\*)"
 
 " {{{ Highlighting
 hi def link IECPOUKeyword           Function
+hi def link IECSpecial              Special
+hi def link IECAccessSpecifier      Identifier
 hi def link IECVarKeyword           Keyword
 hi def link IECConf                 Special
 hi def link IECConfTask             Function
