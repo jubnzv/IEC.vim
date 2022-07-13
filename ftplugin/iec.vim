@@ -20,3 +20,9 @@ setlocal formatoptions+=cro
 setlocal tabstop=2
 setlocal softtabstop=2
 setlocal shiftwidth=2
+
+if exists('b:undo_ftplugin')
+  let b:undo_ftplugin .= "|setl fo< fdm< com< cms< ts< sts< sw<"
+else
+  let b:undo_ftplugin = "setl fo< fdm< com< cms< ts< sts< sw<"
+endif
