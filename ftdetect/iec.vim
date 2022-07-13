@@ -1,4 +1,4 @@
-autocmd BufRead,BufNewFile *.il setf il
-autocmd BufRead,BufNewFile *.IL setf il
-autocmd BufRead,BufNewFile *.st setf st
-autocmd BufRead,BufNewFile *.ST setf st
+autocmd BufRead,BufNewFile *.il setf iec
+autocmd BufRead,BufNewFile *.IL setf iec
+autocmd BufRead,BufNewFile *.st setf iec
+autocmd BufRead,BufNewFile *.ST setf iec
