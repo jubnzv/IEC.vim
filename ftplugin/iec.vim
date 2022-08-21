@@ -11,7 +11,7 @@ setlocal formatoptions-=t
 setlocal foldmethod=indent
 
 " Define comments string
-setlocal comments=
+setlocal comments=s1:(*,mb:*,ex:*),://
 setlocal commentstring=(*%s*)
 
 " Enable automatic comment insertion
