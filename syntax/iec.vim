@@ -120,6 +120,7 @@ syn keyword STStatement OVERLAP REF_TO NULL
 
 " {{{ Comments
 syn region IECComment start="(\*" end="\*)"
+syn region IECComment start="//" end="$"
 " }}}
 
 " {{{ Highlighting
